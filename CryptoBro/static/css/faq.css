@@ -1,0 +1,214 @@
+:root {
+    --media-laptops: 1200px;
+    --media-small-desktops: 991px;
+    --media-tablets: 768px;
+    --media-phones: 420px;
+    --media-small-phones: 350px;
+
+    /* colors */
+    --color-light: white;
+    --color-dark: black;
+
+    --bg-color-dark: black;
+    --bg-color-header: black;
+    --bg-color-button: #975cff;
+    --bg-color-link: #975cff;
+    --bg-color-page: white;
+}
+
+.faq {
+    min-height: calc(100vh - 250px);
+    padding-top: 100px;
+    padding-bottom: 120px;
+    background: linear-gradient(hsl(273, 75%, 66%), hsl(240, 73%, 65%)) no-repeat;
+}
+
+.faq-content-top {
+    display: flex;
+    background: white;
+    border-radius: 28px;
+    position: relative;
+    box-shadow: 5px 20px 25px 0px rgb(0 0 0 / 30%);
+}
+
+.faq-content-top__images {
+    height: 540px;
+    overflow: hidden;
+}
+
+.faq-content-top__img-woman {
+    margin-top: 35px;
+    width: 510px;
+    height: 390px;
+    position: relative;
+    /*top: -31vw;*/
+    left: -15%;
+}
+
+.faq-content-top__bg-img-shadow {
+    margin-top: 35px;
+    width: 107%;
+    position: relative;
+    top: -28vw;
+    left: -20%;
+}
+
+.faq-content-top__img-box {
+    width: 23%;
+    position: absolute;
+    text-align: center;
+    top: 170px;
+    left: -127px;
+}
+
+.faq-content-top__bg-img {
+    width: 77.5%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.faq-content-top__info {
+    padding-top: 15px;
+    width: 85%;
+    margin: 0 auto;
+    height: 120%;
+    padding-bottom: 2.5em;
+}
+
+
+.faq-content-top__info {
+    width: 80%;
+}
+
+.faq-content-top__info-title {
+
+}
+
+.faq-content-top__info-questions {
+
+}
+
+.faq-content-top__info-questions-item {
+    width: 70%;
+    position: relative;
+    margin-bottom: 40px;
+    border-width: 30px;
+    border-bottom: 1px solid hsl(240, 5%, 91%);
+}
+.faq-content-top__info-questions-item-title {
+    cursor: pointer;
+    color: hsl(237, 12%, 33%);
+}
+
+.faq-content-top__info-questions-item-subtitle {
+    margin: 10px 0px 10px 10px;
+    color: hsl(240, 6%, 50%);
+}
+
+.faq-content-top__info-questions-item-arrow {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+}
+
+.bold {
+    font-weight: bold;
+}
+.faq-details{
+  display:block;
+  width: 70%;
+  position: relative;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #e2e8f0;
+  overflow:hidden;
+}
+.faq-summary::-webkit-details-marker{display:none;}
+.faq-summary::-moz-list-bullet{list-style-type:none;}
+.faq-summary::marker{display:none;}
+.faq-summary {
+   display:inline-block;
+   cursor: pointer;
+   height: 120%;
+   color: hsl(237, 12%, 33%);
+}
+.faq-summary:before {
+  top: 0;
+  right: .3em;
+  color: transparent;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%23F47B56' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E") no-repeat 50% 50%;
+  width: 1em;
+  height: 1em;
+  content: "";
+  position: absolute;
+  transition: transform .5s;
+}
+.faq-summary-content{
+color: hsl(240, 6%, 50%);
+margin: 10px 0px 0px 10px;
+}
+.faq-details[open] > .faq-summary:before {
+  transform: rotateZ(90deg);
+}
+.faq-summary ~ * {
+   padding: 0 1em 10px 0em;
+}
+.faq-details[open] .faq-summary ~ *{
+  animation: sweep .5s ease-in-out;
+}
+@keyframes sweep {
+  0%    {opacity: 0;}
+  100%  {opacity: 1;}
+}
+.faq-summary:focus {
+  outline: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    .faq {
+        padding: 50px 0 120px 0;
+    }
+
+    .faq-content-top {
+        margin: 50px 60px 0 60px;
+        /*width: 90%;*/
+    }
+
+    .faq-content-top__bg-img-shadow {
+        width: 95%;
+        top: -40vw;
+        left: -15%;
+    }
+
+    .faq-content-top__img-box {
+        top: 189px;
+        left: -105px
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .faq {
+        padding: 50px 0 120px 0;
+    }
+
+    .faq-content-top {
+        margin: 50px 60px 0 60px;
+        /*width: 90%;*/
+    }
+
+    .faq-content-top__bg-img-shadow {
+        width: 98%;
+        top: -48vw;
+        left: -15%;
+    }
+
+    .faq-content-top__img-box {
+        top: 198px;
+        left: -93px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+}

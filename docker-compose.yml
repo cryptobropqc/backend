@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  nginx:
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    volumes:
+            - ./CryptoBro/static:/srv/www/CryptoBro/static
+            - ./CryptoBro/media:/srv/www/CryptoBro/media
+            - ./CryptoBro/media:/srv/www/CryptoBro/logs
+    expose:
+      - 8080
+    ports:
+      - 80:8080
+    depends_on:
+      - python
+  python:
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/python/Dockerfile
+    volumes:
+      - ./CryptoBro:/srv/www/CryptoBro
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    command: "gunicorn -c gunicorn.py CryptoBro.wsgi"
