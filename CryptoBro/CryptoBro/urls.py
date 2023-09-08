@@ -14,31 +14,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.contrib.sitemaps.views import sitemap
-from blog.sitemaps import PostSitemap
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
+from django.contrib import admin
+from django.urls import include, path
 
-sitemaps = {
-'posts': PostSitemap,
-}
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
-    path('admsys/', admin.site.urls),
+    path('admin/', admin.site.urls),
+    path('', include('posts.urls', namespace="posts")),
     path('api_cryptobro/', include('api_cryptobro.urls', namespace='api_cryptobro')),
-    path('', views.index, name='index'),
-    path('account/', include('account.urls', namespace='account')),
-    path('account/', include('django.contrib.auth.urls')),
-    # path('blog/', include('blog.urls', namespace='blog')),
-    path('blog/', views.blog, name='blog'),
-    path('faq/', views.faq, name='faq'),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    # path('account/', include('account.urls')),
-    # path('', views.index, name='index'),
+    path('auth/', include('users.urls', namespace="users")),
+    path('auth/', include('django.contrib.auth.urls')),
+    path('about/', include("about.urls", namespace="about")),
 ]
+
+handler404 = 'core.views.page_not_found'
+handler500 = 'core.views.server_error'
+handler403 = 'core.views.permission_denied'
+
+
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )

@@ -10,8 +10,8 @@ from api_cryptobro.serializers import (
     
 )
 
-from blog.models import Post, Comment, PublishedManager 
-from account.models import Profile
+from posts.models import Post, Comment
+from users.models import Contact
 
 
 class PostViewSet(viewsets.ModelViewSet):

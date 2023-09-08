@@ -3,8 +3,8 @@ from rest_framework.relations import SlugRelatedField
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
 
-from blog.models import Post, Comment, PublishedManager 
-from account.models import Profile
+from posts.models import Post, Comment 
+from users.models import Contact
  
  
 
