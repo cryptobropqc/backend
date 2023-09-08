@@ -2,17 +2,23 @@ version: '3.8'
 services:
   nginx:
     restart: always
-    build:
-      context: .
-      dockerfile: docker/nginx/Dockerfile
+    image: nginx:latest
     volumes:
-            - ./CryptoBro/static:/srv/www/CryptoBro/static
-            - ./CryptoBro/media:/srv/www/CryptoBro/media
-            - ./CryptoBro/media:/srv/www/CryptoBro/logs
-    expose:
-      - 8080
+#            - ./CryptoBro/static:/srv/www/CryptoBro/static
+#            - ./CryptoBro/media:/srv/www/CryptoBro/media
+            - ./CryptoBro/logs:/srv/www/CryptoBro/logs/
+            - ./docker/nginx:/etc/nginx/conf.d/
+            - ./docker/certbot:/var/www/certbot/    
     ports:
       - 80:8080
+      - 443:443
+    depends_on:
+      - python
+  certbot:
+    image: certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
     depends_on:
       - python
   python:
