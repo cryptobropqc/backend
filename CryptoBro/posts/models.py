@@ -1,7 +1,6 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from users.models import User
 
-User = get_user_model()
 POST_TEXT = 15
 
 
@@ -71,6 +70,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
 
 
 class Follow(models.Model):
