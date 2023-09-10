@@ -182,6 +182,8 @@ CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 #  Число страниц
 COUNT_PAGES = 10
 
+# Абстракция Usera для app reviews
+AUTH_USER_MODEL = "users.User"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -206,6 +208,3 @@ LENG_LOGIN_USER = 150
 # Отправка сообщения на почту
 DOMAIN_NAME = 'yamdb.com'
 EMAIL_HOST = f'support@{DOMAIN_NAME}'
-
-# Абстракция Usera для app reviews
-AUTH_USER_MODEL = "users.User"
