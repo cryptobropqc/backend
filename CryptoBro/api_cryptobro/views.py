@@ -46,6 +46,7 @@ class SignUpViewSet(APIView):
             recipient_list=[request.data.get('email')],
             fail_silently=False,
         )
+        user.save()
         return Response(
             serializer.data, status=HTTP_200_OK
         )
@@ -78,7 +79,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UsersSerializer
     http_method_names = ["get", "post", "patch", "delete"]
-    # permission_classes = (IsAdminOrReadOnly,)
+    permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     search_fields = ("=username",)
     lookup_field = "username"
@@ -119,18 +120,21 @@ class PostViewSet(viewsets.ModelViewSet):
     """Доступ: Аутентификация. Автор редактирует или только чтение."""
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    # permission_classes = (IsAuthorOrReadOnly,)
+    permission_classes = (IsAuthorOrReadOnly,)
     pagination_class = LimitOffsetPagination
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
 
-class GroupViewSet(viewsets.ReadOnlyModelViewSet):
+class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    # permission_classes = (IsAuthorOrReadOnly,)
+    permission_classes = (IsAuthorOrReadOnly,)
 
+    # def perform_create(self, serializer):
+    #     serializer.save(author=self.request.user)
+   
 
 class CommentViewSet(viewsets.ModelViewSet):
     """Доступ к комментариям: Аутентификация."""
