@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'sorl.thumbnail',
     'api_cryptobro',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,11 @@ TEMPLATES = [
         },
     },
 ]
+
+# Отправка сообщения на почту
+DOMAIN_NAME = 'yamdb.com'
+EMAIL_HOST = f'support@{DOMAIN_NAME}'
+DEFAULT_FROM_EMAIL = "jobpavlenko@yandex.ru"
 
 
 WSGI_APPLICATION = 'CryptoBro.wsgi.application'
@@ -204,8 +210,3 @@ SIMPLE_JWT = {
 
 
 LENG_LOGIN_USER = 150
-
-# Отправка сообщения на почту
-DOMAIN_NAME = 'yamdb.com'
-EMAIL_HOST = f'support@{DOMAIN_NAME}'
-

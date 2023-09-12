@@ -1,3 +1,4 @@
+import uuid
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -22,13 +23,23 @@ class User(AbstractUser):
         ADMIN = "admin"
 
     username = models.CharField(
-        'Имя пользователя',
         # validators=(UsernameValidatorRegex()),
         max_length=150,
         unique=True,
+        verbose_name="Имя пользователя",
     )
-    first_name = models.CharField(max_length=150, null=True)
-    last_name = models.CharField(max_length=150, null=True)
+    first_name = models.CharField(
+        max_length=150, 
+        null=True,
+        blank=True,
+        verbose_name="Имя пользователя",
+    )
+    last_name = models.CharField(
+        max_length=150, 
+        blank=True,
+        null=True,
+        verbose_name="Фамилия пользователя",
+    )
     email = models.EmailField(
         blank=True,
         max_length=254,
@@ -36,16 +47,22 @@ class User(AbstractUser):
         verbose_name="email address",
     )
     role = models.CharField(
-        verbose_name="Пользовательская роль",
         # Определение полей из класса RoleChoises
         choices=RoleChoises.choices,
         default=RoleChoises.USER,
         max_length=50,
+        verbose_name="Пользовательская роль",
     )
-    bio = models.TextField("Биография", null=True)
+    bio = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Биография", 
+    )
     confirmation_code = models.CharField(
-        "Код подтверждения пользователя",
-        max_length=100, null=True
+        default=uuid.uuid4,
+        max_length=100, 
+        null=True,
+        verbose_name="Код подтверждения пользователя",
     )
 
     EMAIL_FIELD = 'email'

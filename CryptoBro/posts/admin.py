@@ -18,12 +18,11 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Group)
 
 
 class GroupAdmin(admin.ModelAdmin):
     list_display = ('pk', 'title', 'slug', 'description')
-    search_fields = ('title',)
+    # search_fields = ('title',)
     empty_value_display = '-пусто-'
 
 
@@ -32,5 +31,6 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('author',)
     search_fields = ('author', 'created')
 
+admin.site.register(Group, GroupAdmin)
 
 admin.site.register(Comment, CommentAdmin)

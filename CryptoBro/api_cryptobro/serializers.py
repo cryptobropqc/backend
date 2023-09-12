@@ -19,8 +19,8 @@ class SignUpSerializer(serializers.Serializer):
     )
             
     email = serializers.EmailField(
-        required=False,
         max_length=150,
+        required=True,
         validators=[UniqueValidator(queryset=User.objects.all())],
     )
 
@@ -66,7 +66,7 @@ class UsersSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     author = SlugRelatedField(slug_field='username', read_only=True)
-
+    
     class Meta:
         fields = '__all__'
         model = Post
