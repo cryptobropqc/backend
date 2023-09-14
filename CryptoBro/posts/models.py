@@ -43,6 +43,16 @@ class Post(models.Model):
         blank=True
     )
 
+    # comment = models.ForeignKey(
+    #     Comment,
+    #     on_delete=models.SET_NULL,
+    #     blank=True,
+    #     null=True,
+    #     related_name='comments',
+    #     verbose_name='Комментарий',
+    #     help_text='Комментарий, к которому будет относиться пост'
+    # )
+
     def __str__(self):
         return self.text[:POST_TEXT]
 

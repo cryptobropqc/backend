@@ -11,6 +11,7 @@ app_name = "api_cryptobro"
 router = routers.DefaultRouter()
 router.register("posts", PostViewSet, basename="posts")
 router.register("groups", GroupViewSet, basename="groups")
+router.register(r"users", UserViewSet, basename="users")
 # router.register(r'groups/(?P<group_id>\d+)/', GroupViewSet, basename="groups",)
 # path('group/<slug:slug>/', views.group_posts, name='group_list'),
 router.register(
