@@ -7,7 +7,47 @@ from rest_framework.validators import UniqueValidator
 from posts.models import Post, Comment, Group
 from users.models import User
 from users.validators import UsernameValidatorRegex
- 
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """Сериализатор для аутентификации пользователей."""
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+        # поле "password" будет доступно только для записи 
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User(
+            username=validated_data['username'],
+            email=validated_data['email']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """Сериализатор для изменения пароля пользователя."""
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    class Meta:
+           model = User
+           fields = ('old_password', 'new_password')
+    
+
+    # def validate_old_password(self, value):
+    #     user = self.context['request'].user
+    #     if not user.check_password(value):
+    #         raise serializers.ValidationError("Неправильный старый пароль")
+    #     return value
+
+    def validate(self, data):
+        """Проверка что старый пароль должен отличаться от нового."""
+        if data.get('old_password') == data.get('new_password'):
+            raise serializers.ValidationError("Новый пароль не должен совпадать со старым!")
+        return data
 
 
 class SignUpSerializer(serializers.Serializer):
