@@ -2,17 +2,26 @@ version: '3.8'
 services:
   nginx:
     restart: always
-    build:
-      context: .
-      dockerfile: docker/nginx/Dockerfile
+    image: nginx:latest
     volumes:
-            - ./CryptoBro/static:/srv/www/CryptoBro/static
-#            - ./CryptoBro/media:/srv/www/CryptoBro/media
-            - ./CryptoBro/logs:/srv/www/CryptoBro/logs
-    expose:
-      - 8080
+            - ./CryptoBro/static:/srv/www/CryptoBro/static/
+            - ./CryptoBro/media:/srv/www/CryptoBro/media
+            - ./CryptoBro/logs:/srv/www/CryptoBro/logs/
+            - ./docker/nginx:/etc/nginx/conf.d/
+            - ./docker/certbot/conf:/etc/letsencrypt/
+            - ./docker/certbot/www/:/var/www/certbot/
     ports:
       - 80:8080
+      - 443:443
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    depends_on:
+      - python
+  certbot:
+    image: certbot/certbot
+    volumes:
+            - ./docker/certbot/conf:/etc/letsencrypt/
+            - ./docker/certbot/www/:/var/www/certbot/
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     depends_on:
       - python
   python:
