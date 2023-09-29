@@ -5,8 +5,7 @@ from api_cryptobro.views import (SignUpViewSet, TokenViewSet, UserViewSet,
                                  PostViewSet, CommentViewSet, GroupViewSet,
                                  RegisterUser, UserLogin, UserLogout, 
                                  ChangePasswordAPIView)
-                                #  register_user, user_login, user_logout, 
-                                #  change_password)
+                               
 
 
 app_name = "api_cryptobro"
@@ -16,8 +15,6 @@ router = routers.DefaultRouter()
 router.register("posts", PostViewSet, basename="posts")
 router.register("groups", GroupViewSet, basename="groups")
 router.register(r"users", UserViewSet, basename="users")
-# router.register(r'groups/(?P<group_id>\d+)/', GroupViewSet, basename="groups",)
-# path('group/<slug:slug>/', views.group_posts, name='group_list'),
 router.register(
     r"posts/(?P<post_id>\d+)/comments",
     CommentViewSet,
