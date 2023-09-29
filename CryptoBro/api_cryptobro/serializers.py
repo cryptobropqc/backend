@@ -35,13 +35,6 @@ class ChangePasswordSerializer(serializers.Serializer):
     class Meta:
            model = User
            fields = ('old_password', 'new_password')
-    
-
-    # def validate_old_password(self, value):
-    #     user = self.context['request'].user
-    #     if not user.check_password(value):
-    #         raise serializers.ValidationError("Неправильный старый пароль")
-    #     return value
 
     def validate(self, data):
         """Проверка что старый пароль должен отличаться от нового."""

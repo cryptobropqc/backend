@@ -49,7 +49,7 @@ class RegisterUser(APIView):
 class UserLogin(APIView):
     def post(self, request):
         """Вход пользователя с использованием токенов аутентификации,
-        имя пользователя или пароль."""
+        имя пользователя или пароль. Возвращаем данные о пользователе."""
         username = request.data.get('username')
         password = request.data.get('password')
         user = None
@@ -59,7 +59,9 @@ class UserLogin(APIView):
             user = authenticate(username=username, password=password)
         if user:
             token, _ = Token.objects.get_or_create(user=user)
-            return Response({'Ваш token': token.key}, status=status.HTTP_200_OK)
+            return Response({'email': user.email, 
+                            'username': user.username, 
+                            'token': token.key}, status=status.HTTP_200_OK)
         return Response({'Ошибка': 'Неверные учетные данные пользователя!'}, 
                         status=status.HTTP_401_UNAUTHORIZED)
 
