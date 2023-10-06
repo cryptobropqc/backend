@@ -39,7 +39,9 @@ class ChangePasswordSerializer(serializers.Serializer):
     def validate(self, data):
         """Проверка что старый пароль должен отличаться от нового."""
         if data.get('old_password') == data.get('new_password'):
-            raise serializers.ValidationError("Новый пароль не должен совпадать со старым!")
+            raise serializers.ValidationError(
+                'The new password must not be the same as the old one!'
+            )
         return data
 
 

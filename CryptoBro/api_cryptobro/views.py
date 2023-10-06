@@ -62,7 +62,7 @@ class UserLogin(APIView):
             return Response({'email': user.email, 
                             'username': user.username, 
                             'token': token.key}, status=status.HTTP_200_OK)
-        return Response({'Ошибка': 'Неверные учетные данные пользователя!'}, 
+        return Response({'Error': 'Invalid user credentials!'}, 
                         status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -74,9 +74,9 @@ class UserLogout(APIView):
         try:
             # Удалить токен пользователя для выхода из системы
             request.user.auth_token.delete()
-            return Response({'Сообщение': 'Успешно вышел из системы.'}, status=status.HTTP_200_OK)
+            return Response({'Error': 'Successfully logged out.'}, status=status.HTTP_200_OK)
         except Exception as e:
-            return Response({'Ошибка': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'Error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class ChangePasswordAPIView(APIView):
@@ -91,9 +91,9 @@ class ChangePasswordAPIView(APIView):
                 user.set_password(serializer.data.get('new_password'))
                 user.save()
                 update_session_auth_hash(request, user)  # обновление сеанса после смены пароля
-                return Response({'Сообщение': 'Пароль успешно изменен!'}, status=status.HTTP_200_OK)
+                return Response({'Message': 'Password changed successfully!'}, status=status.HTTP_200_OK)
             return Response(
-                {'Сообщение': 'Неправильный старый пароль.'}, status=status.HTTP_400_BAD_REQUEST)
+                {'Сообщение': 'Incorrect old password.'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
