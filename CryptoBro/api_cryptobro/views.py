@@ -74,7 +74,7 @@ class UserLogout(APIView):
         try:
             # Удалить токен пользователя для выхода из системы
             request.user.auth_token.delete()
-            return Response({'Error': 'Successfully logged out.'}, status=status.HTTP_200_OK)
+            return Response({'Message': 'Successfully logged out.'}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'Error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -93,7 +93,7 @@ class ChangePasswordAPIView(APIView):
                 update_session_auth_hash(request, user)  # обновление сеанса после смены пароля
                 return Response({'Message': 'Password changed successfully!'}, status=status.HTTP_200_OK)
             return Response(
-                {'Сообщение': 'Incorrect old password.'}, status=status.HTTP_400_BAD_REQUEST)
+                {'Message': 'Incorrect old password.'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

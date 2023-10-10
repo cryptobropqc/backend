@@ -24,8 +24,8 @@ router.register(
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("auth/signup/", SignUpViewSet.as_view(), name='signup'),
-    path("auth/token/", TokenViewSet.as_view(), name='token'),
+    #path("auth/signup/", SignUpViewSet.as_view(), name='signup'),
+    #path("auth/token/", TokenViewSet.as_view(), name='token'),
     # Новая авторизация, регистрация, и выход из системы c удалением токена
     path('auth/register/', RegisterUser.as_view(), name='register'),
     path('auth/login/', UserLogin.as_view(), name='login'),
