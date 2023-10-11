@@ -1,6 +1,5 @@
 from re import search
 from django.conf import settings
-# from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 
 
