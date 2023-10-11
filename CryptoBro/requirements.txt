@@ -1,7 +1,7 @@
 ﻿asgiref==3.7.1
 Django==4.2.3
 gunicorn==21.2.0
-gevent==23.9.0
+# gevent==23.9.0
 pytz==2022.7.1
 django-taggit==4.0.0
 Markdown==3.4.3

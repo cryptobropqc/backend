@@ -1,9 +1,8 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from api_cryptobro.views import (SignUpViewSet, TokenViewSet, UserViewSet,
-                                 PostViewSet, CommentViewSet, GroupViewSet,
-                                 RegisterUser, UserLogin, UserLogout, 
+from api_cryptobro.views import (UserViewSet,PostViewSet, CommentViewSet, 
+                                 GroupViewSet, RegisterUser, UserLogin, UserLogout, 
                                  ChangePasswordAPIView)
                                
 

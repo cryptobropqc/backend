@@ -10,19 +10,11 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-from rest_framework_simplejwt.tokens import AccessToken
-from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from CryptoBro.settings import EMAIL_HOST
-
 from .permissions import IsAdminOrReadOnly, IsAdmitOrGetOut, IsAuthorOrReadOnly
 from .serializers import (
-    UsersSerializer,
-    SignUpSerializer,
-    TokenSerializer,
     PostSerializer,
     GroupSerializer,
     CommentSerializer,
@@ -97,52 +89,52 @@ class ChangePasswordAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SignUpViewSet(APIView):
-    """Регистрация."""
-    permission_classes = (AllowAny,)
+# class SignUpViewSet(APIView):
+#     """Регистрация."""
+#     permission_classes = (AllowAny,)
 
-    def post(self, request):
-        serializer = SignUpSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user, _ = User.objects.get_or_create(**serializer.validated_data)
-        send_mail(
-            subject='Код подтверждения',
-            message=(f'Ваш confirmation_code: {user.confirmation_code}'),
-            from_email=EMAIL_HOST,
-            recipient_list=[request.data.get('email')],
-            fail_silently=False,
-        )
-        user.save()
-        return Response(
-            serializer.data, status=HTTP_200_OK
-        )
+#     def post(self, request):
+#         serializer = SignUpSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         user, _ = User.objects.get_or_create(**serializer.validated_data)
+#         send_mail(
+#             subject='Код подтверждения',
+#             message=(f'Ваш confirmation_code: {user.confirmation_code}'),
+#             from_email=EMAIL_HOST,
+#             recipient_list=[request.data.get('email')],
+#             fail_silently=False,
+#         )
+#         user.save()
+#         return Response(
+#             serializer.data, status=HTTP_200_OK
+#         )
 
 
-class TokenViewSet(APIView):
-    """Получение токена."""
-    def post(self, request):
-        serializer = TokenSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = get_object_or_404(
-            User, username=request.data.get('username')
-        )
-        if str(user.confirmation_code) == request.data.get(
-                'confirmation_code'
-        ):
-            refresh = RefreshToken.for_user(user)
-            token = {'token': str(refresh.access_token)}
-            return Response(
-                token, status=HTTP_200_OK
-            )
-        return Response(
-            {'confirmation_code': 'Неверный код подтверждения.'},
-            status=HTTP_400_BAD_REQUEST
-        )
+# class TokenViewSet(APIView):
+#     """Получение токена."""
+#     def post(self, request):
+#         serializer = TokenSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         user = get_object_or_404(
+#             User, username=request.data.get('username')
+#         )
+#         if str(user.confirmation_code) == request.data.get(
+#                 'confirmation_code'
+#         ):
+#             refresh = RefreshToken.for_user(user)
+#             token = {'token': str(refresh.access_token)}
+#             return Response(
+#                 token, status=HTTP_200_OK
+#             )
+#         return Response(
+#             {'confirmation_code': 'Неверный код подтверждения.'},
+#             status=HTTP_400_BAD_REQUEST
+#         )
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UsersSerializer
+    serializer_class = UserSerializer
     http_method_names = ["get", "post", "patch", "delete"]
     permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
@@ -169,10 +161,10 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_patch_me(self, request):
         user = get_object_or_404(User, username=self.request.user)
         if request.method == "GET":
-            serializer = UsersSerializer(user)
+            serializer = UserSerializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         if request.method == "PATCH":
-            serializer = UsersSerializer(
+            serializer = UserSerializer(
                 user, data=request.data, partial=True
             )
             serializer.is_valid(raise_exception=True)

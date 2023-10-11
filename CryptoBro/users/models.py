@@ -1,8 +1,10 @@
 import uuid
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from django.db import models
 
-# from users.validators import UsernameValidatorRegex 
+from users.validators import (
+    username_validator, first_name_validator, last_name_validator)
 
 
 
@@ -23,28 +25,35 @@ class User(AbstractUser):
         ADMIN = "admin"
 
     username = models.CharField(
-        # validators=(UsernameValidatorRegex()),
         max_length=150,
         unique=True,
-        verbose_name="Имя пользователя",
+        verbose_name="Логин пользователя",
+        error_messages={
+            "unique": 
+            "A user with this User Login already exists!"},
+        validators=[username_validator]
     )
     first_name = models.CharField(
         max_length=150, 
         null=True,
         blank=True,
         verbose_name="Имя пользователя",
+        validators=[first_name_validator]
     )
     last_name = models.CharField(
         max_length=150, 
         blank=True,
         null=True,
         verbose_name="Фамилия пользователя",
+        validators=[last_name_validator]
     )
     email = models.EmailField(
-        blank=True,
         max_length=254,
         unique=True,
         verbose_name="email address",
+        error_messages={
+            "unique": 
+            "A user with the same email address already exists!"}
     )
     role = models.CharField(
         # Определение полей из класса RoleChoises

@@ -14,23 +14,23 @@ SECRET_KEY = '%&g08@fa173axmj&5m_@in$)t)56m46ud!ykhgxyt#$f3+uv0e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '[::1]',
-    'testserver',
-    '52.91.232.233',
-    'api.cryptobro.pro',
-]
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 # ALLOWED_HOSTS = [
 #     'localhost',
 #     '127.0.0.1',
 #     '[::1]',
 #     'testserver',
+#     '52.91.232.233',
+#     'api.cryptobro.pro',
 # ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+    'testserver',
+]
 
 
 
@@ -111,23 +111,23 @@ WSGI_APPLICATION = 'CryptoBro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#   'default': {
-#       'ENGINE': 'django.db.backends.sqlite3',
-#       'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#   }
-# }
-
 DATABASES = {
-     "default": {
-         "ENGINE": "django.db.backends.postgresql_psycopg2",
-         "NAME": "cryptobro_dev",
-         "USER": "postgres",
-         "PASSWORD": "ldslfnH0-%ka792JKS",
-         "HOST": "cryprobro-db-dev.cmthskjql8iw.us-east-1.rds.amazonaws.com",
-         "PORT": "5432",
-    }
- }
+  'default': {
+      'ENGINE': 'django.db.backends.sqlite3',
+      'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+  }
+}
+
+# DATABASES = {
+#      "default": {
+#          "ENGINE": "django.db.backends.postgresql_psycopg2",
+#          "NAME": "cryptobro_dev",
+#          "USER": "postgres",
+#          "PASSWORD": "ldslfnH0-%ka792JKS",
+#          "HOST": "cryprobro-db-dev.cmthskjql8iw.us-east-1.rds.amazonaws.com",
+#          "PORT": "5432",
+#     }
+#  }
 
 
 # Password validation
