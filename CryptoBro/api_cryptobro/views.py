@@ -49,6 +49,8 @@ class UserLogin(APIView):
             user = User.objects.filter(email=username).first()
         if not user:
             user = authenticate(username=username, password=password)
+        if user and not check_password(password, user.password):
+            user = None
         if user:
             token, _ = Token.objects.get_or_create(user=user)
             return Response({'email': user.email, 
