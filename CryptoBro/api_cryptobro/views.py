@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, update_session_auth_hash, check_password
+from django.contrib.auth import authenticate, update_session_auth_hash
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404, render
@@ -47,10 +47,12 @@ class UserLogin(APIView):
         user = None
         if '@' in username:
             user = User.objects.filter(email=username).first()
+            username = user.username
+            user = authenticate(username=username, password=password)
         if not user:
             user = authenticate(username=username, password=password)
-        if user and not check_password(password, user.password):
-            user = None
+        #if user and not check_password(password, user.password):
+        #    user = None
         if user:
             token, _ = Token.objects.get_or_create(user=user)
             return Response({'email': user.email, 
