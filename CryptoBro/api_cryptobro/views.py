@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, update_session_auth_hash
+from django.contrib.auth import authenticate, update_session_auth_hash, check_password
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404, render
