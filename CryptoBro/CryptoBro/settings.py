@@ -99,9 +99,9 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Отправка сообщения на почту
-DOMAIN_NAME = 'yamdb.com'
-EMAIL_HOST = f'support@{DOMAIN_NAME}'
-DEFAULT_FROM_EMAIL = "jobpavlenko@yandex.ru"
+DOMAIN_NAME = 'cryptobro.pro'
+EMAIL_HOST = f'info@{DOMAIN_NAME}'
+DEFAULT_FROM_EMAIL = "info@cryptobro.pro"
 
 
 WSGI_APPLICATION = 'CryptoBro.wsgi.application'
