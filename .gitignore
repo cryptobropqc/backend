@@ -154,4 +154,5 @@ Api_cryptobro ALL.odt
 .gitignore
 API - Login.odt
 User.odt
-*.pem
+.pem
+sc.py
