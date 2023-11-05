@@ -1,5 +1,6 @@
 import os
 from datetime import timedelta
+from sc import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -9,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%&g08@fa173axmj&5m_@in$)t)56m46ud!ykhgxyt#$f3+uv0e'
+SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -120,11 +121,11 @@ WSGI_APPLICATION = 'CryptoBro.wsgi.application'
 DATABASES = {
      "default": {
          "ENGINE": "django.db.backends.postgresql_psycopg2",
-         "NAME": "cryptobro_dev",
-         "USER": "postgres",
-         "PASSWORD": "ldslfnH0-%ka792JKS",
-         "HOST": "cryprobro-db-dev.cmthskjql8iw.us-east-1.rds.amazonaws.com",
-         "PORT": "5432",
+         "NAME": "DB_NAME",
+         "USER": "DB_USER",
+         "PASSWORD": "DB_PS",
+         "HOST": "DB_HOST",
+         "PORT": "DB_PORT",
     }
  }
 
