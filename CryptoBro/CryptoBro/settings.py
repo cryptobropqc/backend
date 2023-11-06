@@ -15,10 +15,10 @@ SECRET_KEY = 'o-r2-(t(y-evahg09wiya13+zyh(f$*avy_of$z=2m!+j)ae3j'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '[::1]',    
-    '52.91.232.233',
+#    'localhost',
+#    '127.0.0.1',
+#    '[::1]',    
+#    '52.91.232.233',
     'api.cryptobro.pro',
 ]
 
