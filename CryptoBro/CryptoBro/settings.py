@@ -1,5 +1,7 @@
 import os
 from datetime import timedelta
+from django.core.management.utils import get_random_secret_key
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -9,18 +11,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o-r2-(t(y-evahg09wiya13+zyh(f$*avy_of$z=2m!+j)ae3j'
+
+SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
+#SECRET_KEY = 'o-r2-(t(y-evahg09wiya13+zyh(f$*avy_of$z=2m!+j)ae3j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(" ")
+
+#ALLOWED_HOSTS = [
 #    'localhost',
 #    '127.0.0.1',
 #    '[::1]',    
 #    '52.91.232.233',
-    'api.cryptobro.pro',
-]
+#    'api.cryptobro.pro',
+#]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -118,15 +124,26 @@ WSGI_APPLICATION = 'CryptoBro.wsgi.application'
 # }
 
 DATABASES = {
-     "default": {
-         "ENGINE": "django.db.backends.postgresql_psycopg2",
-         "NAME": "cryptobro_dev",
-         "USER": "postgres",
-         "PASSWORD": "ldslfnH0-%ka792JKS",
-         "HOST": "cryprobro-db-dev.cmthskjql8iw.us-east-1.rds.amazonaws.com",
-         "PORT": "5432",
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.getenv("POSTGRES_DB", ""),
+        "USER": os.getenv("POSTGRES_USER", ""),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", ""),
+        "HOST": os.getenv("DB_HOST", ""),
+        "PORT": os.getenv("DB_PORT", 5432),
     }
- }
+}
+
+# DATABASES = {
+#      "default": {
+#          "ENGINE": "django.db.backends.postgresql_psycopg2",
+#          "NAME": "cryptobro_dev",
+#          "USER": "postgres",
+#          "PASSWORD": "ldslfnH0-%ka792JKS",
+#          "HOST": "cryprobro-db-dev.cmthskjql8iw.us-east-1.rds.amazonaws.com",
+#          "PORT": "5432",
+#     }
+#  }
 
 
 # Password validation
