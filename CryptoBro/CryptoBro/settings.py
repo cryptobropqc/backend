@@ -104,6 +104,7 @@ TEMPLATES = [
 CORS_ALLOWED_ORIGINS = [
     "https://test.cryptobro.pro",
     "https://api.cryptobro.pro",
+    "https://cryptobro.pro",
 ]
 
 # Отправка сообщения на почту
